@@ -1,0 +1,16 @@
+@media screen and (max-width: 1024px) {
+    .container{
+        grid-template-columns: 1fr;
+    }
+    .grocery-holder{
+        grid-column: 1;
+        grid-template-columns: 1fr;
+        padding: 5%;
+        grid-template-rows:40% 50%;
+    }
+
+    #form-holder , #list-holder{
+        grid-column: 1;
+        height: min-content;
+    }
+}

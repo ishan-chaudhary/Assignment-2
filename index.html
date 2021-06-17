@@ -7,11 +7,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="media.css">
 <body>
     <div class="container">
         <div class="grocery-holder">
             <section id="form-holder" class="align-vertical-middle">
-                <h1>Add Grocery Item</h1>
+                <h1 id="add-form-heading">Add Grocery Item</h1>
                 <div class="form-container vertical-align-grid-item">
                     <form id="list-form" data-mode="add">
                         <p id="textarea-element"><strong>Item Name</strong> <span class="textarea" role="textbox"
@@ -20,7 +21,7 @@
                             <label for="quantity"><b>Item Quantity</b></label>
                             <input id="quantity" type="number">
                         </div>
-                        <button type="submit" class="btn-primary"> Submit</button>
+                        <button type="submit" class="btn-primary" id="add-form-button"> Add Item</button>
                     </form>
                 </div>
             </section>

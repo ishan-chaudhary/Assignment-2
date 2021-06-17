@@ -11,7 +11,7 @@ html, body {
 
 .grocery-holder{
     display: grid;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 45% 50%;
     grid-template-columns: 1fr 4fr 1fr;
     grid-column: 2;
     height:100vh;
@@ -75,8 +75,6 @@ form{
 form button{
     grid-row: 3;
     grid-column: 3;
-    height: 50px;
-    width: 100px;
     margin:auto
 }
 
@@ -163,5 +161,3 @@ button{
     background-color: #dc3545;
     border-color: #dc3545;
 }
-
-  
