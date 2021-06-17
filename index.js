@@ -6,6 +6,8 @@ var list = null;
 var heading = null;
 var button = null;
 var form = null;
+var itemName = null;
+var quantity = null;
 
 window.onload = function () {
 
@@ -13,6 +15,8 @@ window.onload = function () {
   heading = document.getElementById("add-form-heading");
   button = document.getElementById("add-form-button");
   form = document.getElementById("list-form");
+  itemName = document.getElementById("item-name");
+  quantity = document.getElementById("quantity");
 
   loadExistingData();
   form.addEventListener("submit", (e) => {
@@ -26,16 +30,15 @@ window.onload = function () {
   });
 
   function addRowHandler() {
-    let itemName = document.getElementById("item-name");
-    let quantity = document.getElementById("quantity").value;
     let index = JSON.parse(localStorage.getItem("data")).length;
-    let listRow = createNewRow(itemName.innerText, quantity, index);
+    let listRow = createNewRow(itemName.innerText, quantity.value, index);
     list.appendChild(listRow);
     let data = JSON.parse(localStorage.getItem("data"));
-    data.push({ name: itemName.innerText, quantity: quantity });
+    data.push({ name: itemName.innerText, quantity: quantity.value });
     localStorage.removeItem("data");
     localStorage.setItem("data", JSON.stringify(data));
     itemName.innerText = "";
+    quantity.value = null;
   }
 
   function editEnableHandler(listRow) {
@@ -46,10 +49,9 @@ window.onload = function () {
     form.setAttribute("data-mode", "edit");
     form.setAttribute("data-index", index);
 
-    
+    listRow.childNodes[2].setAttribute('disabled',true);
+
     let data = JSON.parse(localStorage.getItem("data"));
-    let itemName = document.getElementById("item-name");
-    let quantity = document.getElementById("quantity").value;
 
     heading.innerText = "Edit Grocery Item";
     button.innerText = "Edit Item";
@@ -60,9 +62,9 @@ window.onload = function () {
 
   function editRowHandler() {
     if (editRow) {
-      let itemName = document.getElementById("item-name");
-      let quantity = document.getElementById("quantity").value;
       let itemNameRow = editRow.childNodes[0];
+
+      editRow.childNodes[2].removeAttribute("disabled");
 
       itemNameRow.innerText = itemName.innerText;
 
@@ -71,12 +73,13 @@ window.onload = function () {
       form.setAttribute("data-mode", "add");
 
       let data = JSON.parse(localStorage.getItem("data"));
-      data[index] = { name: itemName.innerText, quantity: quantity };
+      data[index] = { name: itemName.innerText, quantity: quantity.value };
       localStorage.removeItem("data");
       localStorage.setItem("data", JSON.stringify(data));
 
       itemName.innerText = "";
       editRow = null;
+      quantity.value = null;
       heading.innerText = "Add Grocery Item";
       button.innerText = "Add Item";
     } else {
