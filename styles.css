@@ -1,0 +1,167 @@
+html, body {
+    height: 100vh;
+    font-family: 'Gochi Hand', cursive;
+    margin: 0;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+}
+
+.grocery-holder{
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-column: 2;
+    height:100vh;
+}
+
+#form-holder{
+    height: 100%;
+    grid-row: 1;
+    grid-column: 2;
+}
+
+#list-holder{
+    height: 100%;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.align-vertical-middle{
+    display: grid;
+    grid-template-rows: 0.5fr 4fr;
+}
+
+.vertical-align-grid-item{
+    grid-row: 2;
+}
+
+.form-container{
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: .25rem;
+    padding: 5%;
+    box-sizing: border-box;
+
+}
+.list-container{
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: .25rem;
+    padding: 1% 5%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+form{
+    display: grid;
+    grid-template-rows:repeat(3,1fr);
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+}
+
+#textarea-element{
+    grid-column: 1/4;
+}
+
+#quantity-element{
+    grid-column: 1;
+}
+
+form button{
+    grid-row: 3;
+    grid-column: 3;
+    height: 50px;
+    width: 100px;
+    margin:auto
+}
+
+.textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: both;
+    min-height: 40px;
+    line-height: 20px;
+    border: 1px solid black;
+    border-radius: .25rem;
+    height: 100%;
+}
+  
+.textarea[contenteditable]:empty::before {
+    content: "Enter the name of the item...";
+    color: gray;
+}
+
+label{
+    display: block;
+    margin-bottom: 1px;
+}
+
+input{
+    width: 100%;
+    height: 50px;
+}
+
+input[type=number]:focus {
+    border: 3px solid #555;
+}
+
+button{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.list-row{
+    display: grid;
+    grid-template-columns: 6fr 1fr 1fr;
+    grid-column-gap: 5px;
+    border: 1px solid black;
+    border-radius: .25rem;
+    padding: 2%;
+    margin: 5px;   
+}
+
+.item-name{
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.btn-edit {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+  
