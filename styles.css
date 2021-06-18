@@ -174,11 +174,8 @@ button:disabled {
 }
 
 .circle {
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
     position: absolute;
-    right: -5px;
+    right: 0;
     top: -10%;
     color: white;
     text-align: center;
@@ -186,4 +183,10 @@ button:disabled {
     padding: 1px;
     box-sizing: border-box;
     font-size: 1.1rem;
+    border-radius: 0.25rem;
+}
+
+.circle::before {
+    content: "x";
+    font-size: 0.8rem;
 }

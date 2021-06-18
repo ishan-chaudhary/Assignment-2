@@ -33,14 +33,21 @@ function onLoadFunction() {
     let data = JSON.parse(localStorage.getItem("data"));
 
     if (data.hasOwnProperty(itemName.innerText)) {
-
-      let quantityHolder = document.querySelector(".circle[data-index="+ itemName.innerText +"]");
-      let newQuantity = Number(quantity.value) + Number(data[itemName.innerText]);
-      quantityHolder.innerText = newQuantity
-      data[itemName.innerText] =newQuantity     
+      let quantityHolder = document.querySelector(
+        ".circle[data-index=" + itemName.innerText + "]"
+      );
+      let newQuantity =
+        Number(quantity.value) + Number(data[itemName.innerText]);
+      quantityHolder.innerText = newQuantity;
+      data[itemName.innerText] = newQuantity;
       localStorage.removeItem("data");
       localStorage.setItem("data", JSON.stringify(data));
     } else {
+      if (itemName.innerText.length == 0 || quantity.value <= 0) {
+        alert("Please enter valid quantity and name.");
+        return;
+      }
+
       data[itemName.innerText] = quantity.value;
       localStorage.removeItem("data");
       localStorage.setItem("data", JSON.stringify(data));
@@ -154,8 +161,18 @@ function onLoadFunction() {
     return listRow;
   }
 
+  function removeFadeOut(el, speed) {
+    var seconds = speed / 1000;
+    el.style.transition = "opacity " + seconds + "s ease";
+
+    el.style.opacity = 0;
+    setTimeout(function () {
+      el.parentNode.removeChild(el);
+    }, speed);
+  }
+
   function deleteHandler(listRow) {
-    list.removeChild(listRow);
+    removeFadeOut(listRow, 500);
     let data = JSON.parse(localStorage.getItem("data"));
     let index = this.getAttribute("data-index");
     delete data[index];
