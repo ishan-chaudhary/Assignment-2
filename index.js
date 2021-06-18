@@ -9,8 +9,7 @@ var form = null;
 var itemName = null;
 var quantity = null;
 
-window.onload = function () {
-
+function onLoadFunction() {
   list = document.getElementsByClassName("list-container")[0];
   heading = document.getElementById("add-form-heading");
   button = document.getElementById("add-form-button");
@@ -19,13 +18,13 @@ window.onload = function () {
   quantity = document.getElementById("quantity");
 
   loadExistingData();
-  
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     let mode = form.getAttribute("data-mode");
-    if (mode == "add") {
+    if (mode === "add") {
       addRowHandler();
-    } else if (mode == "edit") {
+    } else if (mode === "edit") {
       editRowHandler();
     }
   });
@@ -34,31 +33,33 @@ window.onload = function () {
     let data = JSON.parse(localStorage.getItem("data"));
 
     if (data.hasOwnProperty(itemName.innerText)) {
-      data[itemName.innerText] = Number(quantity.value) + Number(data[itemName.innerText]);
+
+      let quantityHolder = document.querySelector(".circle[data-index="+ itemName.innerText +"]");
+      let newQuantity = Number(quantity.value) + Number(data[itemName.innerText]);
+      quantityHolder.innerText = newQuantity
+      data[itemName.innerText] =newQuantity     
       localStorage.removeItem("data");
       localStorage.setItem("data", JSON.stringify(data));
-    }
-    else{
-        data[itemName.innerText] = quantity.value;
-        localStorage.removeItem("data");
-        localStorage.setItem("data", JSON.stringify(data));
-    
-        let listRow = createNewRow(itemName.innerText, quantity.value);
-        list.appendChild(listRow);
+    } else {
+      data[itemName.innerText] = quantity.value;
+      localStorage.removeItem("data");
+      localStorage.setItem("data", JSON.stringify(data));
+
+      let listRow = createNewRow(itemName.innerText, quantity.value);
+      list.appendChild(listRow);
     }
     itemName.innerText = "";
     quantity.value = null;
   }
 
   function editEnableHandler(listRow) {
-   
     editRow = listRow;
     let index = this.getAttribute("data-index");
 
     form.setAttribute("data-mode", "edit");
     form.setAttribute("data-index", index);
 
-    listRow.childNodes[2].setAttribute('disabled',true);
+    listRow.childNodes[2].setAttribute("disabled", true);
 
     let data = JSON.parse(localStorage.getItem("data"));
 
@@ -72,17 +73,21 @@ window.onload = function () {
   function editRowHandler() {
     if (editRow) {
       let itemNameRow = editRow.childNodes[0];
+      let quantityHolder = itemNameRow.childNodes[1];
 
       editRow.childNodes[2].removeAttribute("disabled");
+      quantityHolder.innerText = quantity.value;
 
-      itemNameRow.innerText = itemName.innerText;
+      itemNameRow.innerHTML = itemName.innerText;
+
+      itemNameRow.appendChild(quantityHolder);
 
       let index = form.getAttribute("data-index");
 
       form.setAttribute("data-mode", "add");
 
       let data = JSON.parse(localStorage.getItem("data"));
-      data[index] =quantity.value ;
+      data[index] = quantity.value;
       localStorage.removeItem("data");
       localStorage.setItem("data", JSON.stringify(data));
 
@@ -100,7 +105,7 @@ window.onload = function () {
     let data = JSON.parse(localStorage.getItem("data"));
     let keys = Object.keys(data);
     for (let key of keys) {
-      let listRow = createNewRow(key, quantity);
+      let listRow = createNewRow(key, data[key]);
       list.appendChild(listRow);
     }
   }
@@ -113,6 +118,12 @@ window.onload = function () {
     itemNameRow.setAttribute("class", "item-name");
     itemNameRow.setAttribute("id", "item-name-" + name);
     itemNameRow.innerText = name;
+
+    let quantityHolder = document.createElement("div");
+    quantityHolder.setAttribute("class", "circle");
+    quantityHolder.setAttribute("data-index", name);
+    quantityHolder.innerText = quantity;
+    itemNameRow.appendChild(quantityHolder);
 
     let editButton = document.createElement("button");
     editButton.setAttribute("class", "btn-edit");
@@ -147,8 +158,10 @@ window.onload = function () {
     list.removeChild(listRow);
     let data = JSON.parse(localStorage.getItem("data"));
     let index = this.getAttribute("data-index");
-    delete data.index;
+    delete data[index];
     localStorage.removeItem("data");
     localStorage.setItem("data", JSON.stringify(data));
   }
-};
+}
+
+onLoadFunction();

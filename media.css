@@ -9,7 +9,7 @@
         grid-column: 1;
         grid-template-columns: 1fr;
         padding: 5%;
-        grid-template-rows: 40% 50%;
+        grid-template-rows: minmax(auto,30vh) 50vh;
         grid-column-gap: 0%;
     }
 
@@ -48,8 +48,9 @@
         grid-column: 1;
         grid-template-columns: 1fr;
         padding: 5%;
-        grid-template-rows: repeat(2,30%);
+        grid-template-rows: repeat(2,50vh);
         grid-column-gap: 0%;
+        grid-row-gap: 5%;
     }
 
     #form-holder , #list-holder{
