@@ -7,14 +7,13 @@ html, body {
 .container{
     display: grid;
     grid-template-rows: 0.25fr 6fr;
-    padding: 10%;
+    padding: 5% 10%;
 }
 
 .grocery-holder{
     display: grid;
-    grid-template-rows: min-content;
+    grid-template-rows: 50%;
     grid-row: 2;
-    height:100vh;
     grid-column-gap: 1%;
 }
 
