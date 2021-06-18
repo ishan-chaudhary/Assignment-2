@@ -1,7 +1,10 @@
 html, body {
     height: 100vh;
-    font-family: 'Gochi Hand', cursive;
+    font-family: apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Noto Sans,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Helvetica Neue,Helvetica,sans-serif;
     margin: 0;
+    letter-spacing: -.12px;
+    line-height: 16px;
+    font-weight: 500;
 }
 
 .container{
@@ -42,8 +45,8 @@ html, body {
 .form-container{
     height: 100%;
     width: 100%;
-    border: 1px solid black;
-    border-radius: .25rem;
+    border: 2px solid #E2E2E2;
+    /* border-radius: .25rem; */
     padding: 5% 5% 1%;
     box-sizing: border-box;
 
@@ -51,8 +54,8 @@ html, body {
 .list-container{
     height: 100%;
     width: 100%;
-    border: 1px solid black;
-    border-radius: .25rem;
+    border: 2px solid #E2E2E2;
+    /* border-radius: .25rem; */
     padding: 1% 5%;
     box-sizing: border-box;
     overflow-y: scroll;
@@ -86,7 +89,7 @@ form button{
     resize: both;
     min-height: 40px;
     line-height: 20px;
-    border: 1px solid black;
+    border: 2px solid #E2E2E2;
     border-radius: .25rem;
     height: 100%;
 }
@@ -122,7 +125,7 @@ button{
     -moz-user-select: none;
     user-select: none;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     padding: .375rem .75rem;
     font-size: 1rem;
     border-radius: .25rem;
@@ -149,7 +152,7 @@ button{
 .item-name{
     width: 100%;
     white-space: break-spaces;
-    border: 1px solid black;
+    border: 2px solid #E2E2E2;
     padding: 1px;
     box-sizing: border-box;
     border-radius: .25rem;
@@ -157,15 +160,15 @@ button{
 }
 
 .btn-edit {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
+    color: white;
+    background-color: rgb(238, 194, 2);
+    border-color: rgb(238, 194, 2);
 }
 
 .btn-danger {
     color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+    background-color: rgb(255, 96, 96);
+    border-color: rgb(255, 96, 96);
 }
 
 button:disabled {
@@ -176,7 +179,7 @@ button:disabled {
 .circle {
     position: absolute;
     right: 0;
-    top: -10%;
+    top: 0;
     color: white;
     text-align: center;
     background-color: brown;
@@ -189,4 +192,54 @@ button:disabled {
 .circle::before {
     content: "x";
     font-size: 0.8rem;
+}
+
+input {
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    border-radius: inherit;
+}
+
+#quantity{
+    border-width: 0px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+}
+
+.input-wrapper{
+    transition-property: background-color;
+    border-left-color: rgb(219, 219, 219);
+    border-bottom-color: rgb(219, 219, 219);
+    border-right-color: rgb(219, 219, 219);
+    border-top-color: rgb(219, 219, 219);
+    transition-duration: 200ms;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+label , #textarea-element{
+    color: #0A0A14;
+    text-decoration: underline;
+    font-size: 14px;
+    line-height: 16px;
 }

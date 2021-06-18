@@ -16,11 +16,13 @@
                 <h1 id="add-form-heading">Add Grocery Item</h1>
                 <div class="form-container vertical-align-grid-item">
                     <form id="list-form" data-mode="add">
-                        <p id="textarea-element"><strong>Item Name</strong> <span class="textarea" role="textbox"
+                        <p id="textarea-element">Item Name <span class="textarea" role="textbox"
                                 id="item-name" contenteditable></span></p>
                         <div id="quantity-element">
-                            <label for="quantity"><b>Item Quantity</b></label>
+                            <label for="quantity">Item Quantity</label>
+                            <div class="input-wrapper">
                             <input id="quantity" type="number" placeholder="Enter Item Quantity">
+                        </div>
                         </div>
                         <button type="submit" class="btn-primary" id="add-form-button"> Add Item</button>
                     </form>
