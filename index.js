@@ -1,6 +1,6 @@
 var editRow = null;
 let localDataStorage = localStorage.getItem("data");
-if (!localDataStorage) localStorage.setItem("data", JSON.stringify([]));
+if (!localDataStorage) localStorage.setItem("data", JSON.stringify({}));
 
 var list = null;
 var heading = null;
@@ -19,6 +19,7 @@ window.onload = function () {
   quantity = document.getElementById("quantity");
 
   loadExistingData();
+  
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     let mode = form.getAttribute("data-mode");
@@ -30,13 +31,21 @@ window.onload = function () {
   });
 
   function addRowHandler() {
-    let index = JSON.parse(localStorage.getItem("data")).length;
-    let listRow = createNewRow(itemName.innerText, quantity.value, index);
-    list.appendChild(listRow);
     let data = JSON.parse(localStorage.getItem("data"));
-    data.push({ name: itemName.innerText, quantity: quantity.value });
-    localStorage.removeItem("data");
-    localStorage.setItem("data", JSON.stringify(data));
+
+    if (data.hasOwnProperty(itemName.innerText)) {
+      data[itemName.innerText] = Number(quantity.value) + Number(data[itemName.innerText]);
+      localStorage.removeItem("data");
+      localStorage.setItem("data", JSON.stringify(data));
+    }
+    else{
+        data[itemName.innerText] = quantity.value;
+        localStorage.removeItem("data");
+        localStorage.setItem("data", JSON.stringify(data));
+    
+        let listRow = createNewRow(itemName.innerText, quantity.value);
+        list.appendChild(listRow);
+    }
     itemName.innerText = "";
     quantity.value = null;
   }
@@ -56,8 +65,8 @@ window.onload = function () {
     heading.innerText = "Edit Grocery Item";
     button.innerText = "Edit Item";
 
-    itemName.innerText = data[index].name;
-    quantity.value = data[index].quantity;
+    itemName.innerText = index;
+    quantity.value = data[index];
   }
 
   function editRowHandler() {
@@ -73,7 +82,7 @@ window.onload = function () {
       form.setAttribute("data-mode", "add");
 
       let data = JSON.parse(localStorage.getItem("data"));
-      data[index] = { name: itemName.innerText, quantity: quantity.value };
+      data[index] =quantity.value ;
       localStorage.removeItem("data");
       localStorage.setItem("data", JSON.stringify(data));
 
@@ -89,27 +98,26 @@ window.onload = function () {
 
   function loadExistingData() {
     let data = JSON.parse(localStorage.getItem("data"));
-    let index = 0;
-    for (let i in data) {
-      let listRow = createNewRow(data[i].name, data[i].quantity, index);
+    let keys = Object.keys(data);
+    for (let key of keys) {
+      let listRow = createNewRow(key, quantity);
       list.appendChild(listRow);
-      index++;
     }
   }
 
-  function createNewRow(name, quantity, index) {
+  function createNewRow(name, quantity) {
     let listRow = document.createElement("div");
     listRow.setAttribute("class", "list-row");
 
     let itemNameRow = document.createElement("div");
     itemNameRow.setAttribute("class", "item-name");
-    itemNameRow.setAttribute("id", "item-name-" + index);
+    itemNameRow.setAttribute("id", "item-name-" + name);
     itemNameRow.innerText = name;
 
     let editButton = document.createElement("button");
     editButton.setAttribute("class", "btn-edit");
     editButton.setAttribute("type", "button");
-    editButton.setAttribute("data-index", index);
+    editButton.setAttribute("data-index", name);
     editButton.innerText = "Edit";
 
     editButton.addEventListener(
@@ -121,8 +129,8 @@ window.onload = function () {
     deleteButton.setAttribute("class", "btn-danger");
     deleteButton.innerText = "Delete";
 
-    editButton.setAttribute("data-index", index);
-    deleteButton.setAttribute("data-index", index);
+    editButton.setAttribute("data-index", name);
+    deleteButton.setAttribute("data-index", name);
 
     deleteButton.addEventListener(
       "click",
@@ -139,10 +147,8 @@ window.onload = function () {
     list.removeChild(listRow);
     let data = JSON.parse(localStorage.getItem("data"));
     let index = this.getAttribute("data-index");
-    let finalArray = data.filter(function (el, i) {
-      return i != index;
-    });
+    delete data.index;
     localStorage.removeItem("data");
-    localStorage.setItem("data", JSON.stringify(finalArray));
+    localStorage.setItem("data", JSON.stringify(data));
   }
 };
